@@ -1,0 +1,30 @@
+<p>students works!</p>
+
+<form #paginationForm="ngForm" (ngSubmit)="onPaginationSubmit()">
+    <label for="page">Nr strony</label>
+    <input id="page" name="page" type="number" min="0" required [(ngModel)]="page"/>
+    <label for="count">Liczba elementów na stronie</label>
+    <input id="count" name="count" type="number" min="0" required [(ngModel)]="count"/>
+    <input id="submit" type="submit" name="submit" value="Pobierz" 
+            [disabled]="!paginationForm.valid" />
+</form>
+
+<br />
+
+<div *ngFor="let s of data">
+    {{s | json}}
+</div>
+
+<br />
+
+<table border="1">
+    <thead>
+        <th>Imię</th>
+        <th>Nazwisko</th>
+        <th>Grupa</th>
+        <th>Nr albumu</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let s of data" [app-student-row]="s"></tr>
+    </tbody>
+</table>
