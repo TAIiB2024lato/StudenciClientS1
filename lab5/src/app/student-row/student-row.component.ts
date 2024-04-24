@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { StudentResponseDTo } from '../models/student-response.interface';
 
 @Component({
@@ -8,4 +8,9 @@ import { StudentResponseDTo } from '../models/student-response.interface';
 })
 export class StudentRowComponent {
   @Input('app-student-row') student!: StudentResponseDTo;
+  @Output() choosed = new EventEmitter<StudentResponseDTo>();
+
+  public onChooseClick(): void {
+    this.choosed.emit(this.student);
+  }
 }

@@ -1,0 +1,57 @@
+<form #studentForm="ngForm" (ngSubmit)="onSubmit($event)">
+    <div>
+        <label for="albumNo">Numer albumu</label>
+        <input 
+            id="albumNo" 
+            name="albumNo" 
+            type="number" 
+            [(ngModel)]="object.albumNo"
+            required
+            min="100"/>
+    </div>
+    <div>
+        <label for="name">Imię</label>
+        <input 
+            id="name" 
+            name="name" 
+            type="text" 
+            [(ngModel)]="object.name"
+            required
+            minlength="3"/>
+    </div>
+    <div>
+        <label for="surname">Nazwisko</label>
+        <input 
+            id="surname" 
+            name="surname" 
+            type="text" 
+            [(ngModel)]="object.surname"
+            required
+            minlength="5"/>
+    </div>
+    <div>
+        <label for="groupId">Grupa</label>
+        <select 
+            id="groupId"
+            name="groupId"
+            [(ngModel)]="object.groupId">
+                <option [value]="null">Brak grupy</option>
+                <option [value]="1">Grupa pierwsza</option>
+                <option [value]="2">Grupa druga</option>
+                <option [value]="3">Grupa trzecia</option>
+                <option [value]="4">Grupa czwarta</option>
+        </select>
+    </div>
+    <input 
+        id="cancel" 
+        name="cancel" 
+        type="button" 
+        value="Anuluj" 
+        (click)="cancel.emit()"/>
+    <input 
+        id="submit" 
+        name="submit" 
+        type="submit" 
+        value="Wyślij"
+        [disabled]="studentForm.invalid" />
+</form>

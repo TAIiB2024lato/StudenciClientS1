@@ -11,6 +11,8 @@ export class StudentsComponent {
   public page: number = 0;
   public count: number = 10;
   public data: StudentResponseDTo[] = [];
+  public isTableView = true;
+  public choosedStudent: StudentResponseDTo | null = null;
 
   constructor(private studentsService: StudentsService) {
     this.loadData();
@@ -27,6 +29,19 @@ export class StudentsComponent {
   }
 
   public onPaginationSubmit(): void {
+    this.loadData();
+  }
+
+  public onDataVisChange(): void {
+    this.isTableView = !this.isTableView;
+  }
+
+  public onRowChoosed(event: StudentResponseDTo): void {
+    this.choosedStudent = event;
+  }
+
+  public onSubmit(): void {
+    this.choosedStudent = null;
     this.loadData();
   }
 }

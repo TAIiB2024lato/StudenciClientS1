@@ -11,20 +11,50 @@
 
 <br />
 
-<div *ngFor="let s of data">
-    {{s | json}}
+<div>
+    <button (click)="onDataVisChange()">
+        {{isTableView ? 'JSON' : 'Tabela'}}
+    </button>
 </div>
 
 <br />
 
-<table border="1">
+<ng-container *ngIf="!isTableView">
+    <div 
+        *ngFor="let s of data" 
+        (click)="choosedStudent = s"
+        class="selectable">
+        {{s | json}}
+    </div>
+</ng-container>
+
+<br />
+
+<table *ngIf="isTableView" border="1">
     <thead>
         <th>Imię</th>
         <th>Nazwisko</th>
         <th>Grupa</th>
         <th>Nr albumu</th>
+        <th>Wybierz</th>
     </thead>
     <tbody>
-        <tr *ngFor="let s of data" [app-student-row]="s"></tr>
+        <tr 
+            *ngFor="let s of data" 
+            [app-student-row]="s"
+            (choosed)="onRowChoosed($event)">
+        </tr>
     </tbody>
 </table>
+
+<br/>
+<hr/>
+
+<div *ngIf="choosedStudent">
+    Wybrano studenta: {{choosedStudent.name}}
+
+    <app-student-form
+        (submit)="onSubmit()"
+        (cancel)="choosedStudent = null"
+    ></app-student-form>
+</div>
